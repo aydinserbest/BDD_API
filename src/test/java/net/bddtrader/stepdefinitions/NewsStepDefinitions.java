@@ -25,6 +25,8 @@ public class NewsStepDefinitions {
                 .map(articleData -> NewsItemTestData.newsItemFrom(articleData))
                 .toList();
 
+        System.out.println("populated news article: "+newsArticles);
+
     }
     @When("she views the latest news articles")
     public void she_views_the_latest_news_articles() {

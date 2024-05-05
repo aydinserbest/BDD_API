@@ -2,9 +2,7 @@ package net.bddtrader.testdata;
 
 import com.serenitydojo.news.NewsItem;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
@@ -18,12 +16,33 @@ public class NewsItemTestData {
     private String summary;
     private String related;
      */
-    private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    private static final  LocalDateTime DEFAULT_LOCALE_TIME = LocalDateTime.parse(initialData.get("date") + " " + initialData.get("time"), DEFAULT_FORMATTER);
-    private static final ZonedDateTime DEFAULT_ZONED_TIME = ZonedDateTime.of(DEFAULT_LOCALE_TIME, ZoneId.of("UTC"));
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+
+    private static final LocalDate DEFAULT_DATE = LocalDate.of(2022, 10, 10);
+    private static final LocalTime DEFAULT_TIME = LocalTime.of(1, 1);
+
+    private static final String DEFAULT_HEADLINE = "Exciting article";
+    private static final String DEFAULT_SOURCE = "SeekingAlpha";
+    private static final String DEFAULT_URL = "https://api.example.com/1.0/stock/aapl/article/5793469523684637";
+    private static final String DEFAULT_SUMMARY = "Singular Research Director's Letter, April 2018";
+    private static final String DEFAULT_RELATED = "AAPL,BMWYY";
 
     public static NewsItem newsItemFrom(Map<String, String> initialData) {
+        LocalDate date = initialData.containsKey("date") ?
+                LocalDate.parse(initialData.get("date"), DATE_FORMATTER) : DEFAULT_DATE;
 
-        return null;
+        LocalTime time = initialData.containsKey("time") ?
+                LocalTime.parse(initialData.get("time"), TIME_FORMATTER) : LocalTime.of(DEFAULT_TIME.getHour(), DEFAULT_TIME.getMinute(), 0);
+
+        ZonedDateTime articleTimestamp = ZonedDateTime.of(date, time, ZoneId.of("UTC"));
+
+        String headline = initialData.getOrDefault("headline", DEFAULT_HEADLINE);
+        String source = initialData.getOrDefault("source", DEFAULT_SOURCE);
+        String url = initialData.getOrDefault("url", DEFAULT_URL);
+        String summary = initialData.getOrDefault("summary", DEFAULT_SUMMARY);
+        String related = initialData.getOrDefault("related", DEFAULT_RELATED);
+
+        return new NewsItem(articleTimestamp, headline, source, url, summary, related);
     }
 }

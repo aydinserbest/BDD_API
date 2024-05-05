@@ -54,4 +54,12 @@ public class NewsItem {
     public String getRelated() {
         return related;
     }
+    @Override
+    public String toString() {
+        return "NewsItem{" +
+
+                " headline='" + headline + '\'' +
+                " related='" + related + '\'' +
+                '}';
+    }
 }
