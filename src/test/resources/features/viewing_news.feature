@@ -15,7 +15,7 @@ Feature: View news articles about different companies
         | 2018-05-23 | 15:33 | Apple launches privacy portal for user data ahead of GDPR |
         | 2018-05-23 | 14:47 | How to share your location with loved ones so they know you're safe |
         | 2018-05-23 | 14:14 | Trading Mistake 8 (Apple): Poor Profit-Taking |
-      When she views he latest news rticles
+      When she views the latest news articles
       Then the articles should be presented as follows:
         | date       | time  | headline                      |
         | 2018-05-23 | 22:25 | Will Earnings Normalize Soon? |
@@ -28,6 +28,9 @@ Feature: View news articles about different companies
         | 2018-05-23 | 15:33 | Apple launches privacy portal for user data ahead of GDPR |
         | 2018-05-23 | 14:47 | How to share your location with loved ones so they know you're safe |
         | 2018-05-23 | 14:14 | Trading Mistake 8 (Apple): Poor Profit-Taking |
+
+
+
 
 
 
